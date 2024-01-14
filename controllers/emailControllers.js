@@ -7,7 +7,7 @@ const generateOTP = require("./generateOTP.js");
 
 const sendOTP = (req, res) => {
   const { userEmail } = req.body;
-  console.log("userEmail:", userEmail);
+  console.log(req.body);
   const otp = generateOTP();
 
   let config = {
