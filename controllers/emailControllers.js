@@ -2,14 +2,11 @@ const nodemailer = require("nodemailer");
 const Mailgen = require("mailgen");
 const { EMAIL, PASSWORD } = require("../env.js");
 const generateOTP = require("./generateOTP.js");
-
-
-
 const sendOTP = (req, res) => {
   const { userEmail } = req.body;
   console.log(req.body);
   const otp = generateOTP();
-
+  console.log(otp);
   let config = {
     service: "gmail",
     auth: {
@@ -32,6 +29,7 @@ const sendOTP = (req, res) => {
     .then(() => {
       return res.status(201).json({
         msg: "You should receive an email with the OTP.",
+        otp: otp
       });
     })
     .catch((error) => {
@@ -39,6 +37,5 @@ const sendOTP = (req, res) => {
       return res.status(500).json({ error: "Internal server error" });
     });
 };
-
 
 module.exports = { sendOTP };
